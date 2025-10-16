@@ -1,0 +1,105 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Animated Bubble Map of Renewable Share and Generation by State (2010–2025)",
+    "width": 800,
+    "height": 600,
+    "background": "#f8fafc",
+    "config": {
+      "background": "#f8fafc",
+      "legend": {"labelColor": "#1e293b", "titleColor": "#1e293b"},
+      "style": {"guide-label": {"color": "#1e293b"}}
+    },
+  
+    "params": [
+      {
+        "name": "selectedYear",
+        "value": 2025,
+        "bind": {
+          "input": "range",
+          "min": 2010,
+          "max": 2025,
+          "step": 1,
+          "name": "Select Year:"
+        }
+      }
+    ],
+  
+    "layer": [
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/achikins/FIT3179_DataVisualisation_2_34082034/main/data/aus_states.topojson",
+            "format": {"type": "topojson", "feature": "ne_10m_admin_1_states_provinces"}
+          },
+          "mark": {"type": "geoshape", "fill": "#f1f5f9", "stroke": "#cbd5e1"},
+          "projection": {
+            "type": "mercator",
+            "center": [135, -28],
+            "scale": 1000
+          }
+        },
+  
+      {
+        "data": {"url": "https://raw.githubusercontent.com/achikins/FIT3179_DataVisualisation_2_34082034/main/data/Renewable_Share_By_State_2010_2025.csv"},
+        "transform": [
+          {
+            "calculate": "toNumber(datum.Year)",
+            "as": "YearNum"
+          },
+          {"filter": "datum.YearNum == selectedYear"},
+          {
+            "lookup": "State",
+            "from": {
+              "data": {
+                "values": [
+                  {"State": "NS", "lat": -32.0, "lon": 147.0},
+                  {"State": "VI", "lat": -37.0, "lon": 144.0},
+                  {"State": "QL", "lat": -23.0, "lon": 143.0},
+                  {"State": "SA", "lat": -30.0, "lon": 135.0},
+                  {"State": "TA", "lat": -42.0, "lon": 147.0},
+                  {"State": "WA", "lat": -26.0, "lon": 121.0}
+                ]
+              },
+              "key": "State",
+              "fields": ["lat", "lon"]
+            }
+          }
+        ],
+        "mark": {"type": "circle", "stroke": "#1e293b", "strokeWidth": 0.5, "opacity": 0.9},
+        "encoding": {
+          "longitude": {"field": "lon", "type": "quantitative"},
+          "latitude": {"field": "lat", "type": "quantitative"},
+          "size": {
+            "field": "Renewable_GWh",
+            "type": "quantitative",
+            "scale": {"range": [200, 3000]},
+            "legend": {"title": "Renewable GWh"}
+          },
+          "color": {
+            "field": "Renewable_Share (%)",
+            "type": "quantitative",
+            "scale": {"scheme": "greens", "domain": [0, 100]},
+            "legend": {"title": "Renewable Share (%)"}
+          },
+          "tooltip": [
+            {"field": "State", "type": "nominal", "title": "State"},
+            {"field": "YearNum", "type": "ordinal", "title": "Year"},
+            {"field": "Renewable_Share (%)", "type": "quantitative", "format": ".1f", "title": "Renewable Share (%)"},
+            {"field": "Renewable_GWh", "type": "quantitative", "format": ".0f", "title": "Renewable GWh"}
+          ]
+        },
+        "projection": {
+          "type": "mercator",
+          "center": [135, -28],
+          "scale": 1000
+        }
+      }
+    ],
+  
+    "title": {
+      "text": "Animated Bubble Map — Renewable Growth Across Australian States (2010–2025)",
+      "anchor": "start",
+      "fontSize": 18,
+      "color": "#1e293b"
+    }
+  }
+  

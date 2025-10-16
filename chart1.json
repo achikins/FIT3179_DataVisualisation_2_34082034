@@ -1,0 +1,91 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Australia's Renewable Energy Trends (2010–2025)",
+    "width": 700,
+    "height": 400,
+    "background": "#f8fafc",
+  
+    "config": {
+      "background": "#f8fafc",
+      "style": {"guide-label": {"color": "#1e293b"}, "guide-title": {"color": "#1e293b"}},
+      "axis": {"gridColor": "#e2e8f0", "labelColor": "#64748b", "titleColor": "#64748b"},
+      "legend": {
+        "labelColor": "#1e293b",
+        "titleColor": "#1e293b",
+        "orient": "top-right",
+        "fillColor": "#ffffff",
+        "strokeColor": "#e2e8f0",
+        "cornerRadius": 6
+      }
+    },
+  
+    "data": {
+      "url": "https://raw.githubusercontent.com/achikins/FIT3179_DataVisualisation_2_34082034/main/data/Renewable_Share_By_State_2010_2025.csv"
+    },
+  
+    "transform": [
+      {"calculate": "toNumber(datum.Year)", "as": "YearNum"},
+      {
+        "aggregate": [
+          {"op": "mean", "field": "Renewable_Share (%)", "as": "Avg_Renewable_Share"},
+          {"op": "sum", "field": "Total_GWh", "as": "Total_Generation"},
+          {"op": "sum", "field": "Renewable_GWh", "as": "Total_Renewable_GWh"}
+        ],
+        "groupby": ["YearNum"]
+      },
+      {
+        "calculate": "datum.Total_Renewable_GWh / datum.Total_Generation * 100",
+        "as": "Weighted_Renewable_Share"
+      },
+      {
+        "fold": ["Avg_Renewable_Share", "Weighted_Renewable_Share"],
+        "as": ["Metric", "Value"]
+      }
+    ],
+  
+    "mark": {"type": "line", "interpolate": "monotone", "strokeWidth": 3},
+  
+    "encoding": {
+      "x": {
+        "field": "YearNum",
+        "type": "ordinal",
+        "axis": {"title": "Year"}
+      },
+      "y": {
+        "field": "Value",
+        "type": "quantitative",
+        "axis": {"title": "Renewable Share (%)"}
+      },
+      "color": {
+        "field": "Metric",
+        "type": "nominal",
+        "title": "Metric Type",
+        "scale": {
+          "domain": ["Avg_Renewable_Share", "Weighted_Renewable_Share"],
+          "range": ["#00e5a8", "#ff6e6e"]
+        },
+        "legend": {"title": "Metric Type"}
+      },
+      "strokeDash": {
+        "field": "Metric",
+        "type": "nominal",
+        "scale": {
+          "domain": ["Avg_Renewable_Share", "Weighted_Renewable_Share"],
+          "range": [[], [4, 3]]
+        }
+      },
+      "tooltip": [
+        {"field": "YearNum", "type": "ordinal", "title": "Year"},
+        {"field": "Metric", "type": "nominal", "title": "Type"},
+        {"field": "Value", "type": "quantitative", "format": ".2f", "title": "Renewable Share (%)"}
+      ]
+    },
+  
+    "title": {
+      "text": "Australia's Renewable Energy Trends (2010–2025)",
+      "color": "#1e293b",
+      "fontSize": 18,
+      "anchor": "start"
+    }
+  }
+  

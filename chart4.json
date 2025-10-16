@@ -1,0 +1,100 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Chart 4 — Correlation between Renewable Share (%) and Emission Intensity (kgCO2e/MWh), 2010–2025",
+    "width": 720,
+    "height": 420,
+    "background": "#f8fafc",
+  
+    "config": {
+      "background": "#f8fafc",
+      "axis": {"labelColor": "#64748b", "titleColor": "#1e293b", "gridColor": "#e2e8f0"},
+      "legend": {"labelColor": "#1e293b", "titleColor": "#1e293b"},
+      "style": {"guide-label": {"color": "#1e293b"}}
+    },
+  
+    "data": {
+      "url": "https://raw.githubusercontent.com/achikins/FIT3179_DataVisualisation_2_34082034/main/data/Renewable_Share_By_State_2010_2025.csv"
+    },
+  
+    "transform": [
+      {
+        "calculate": "toNumber(datum.Year)",
+        "as": "YearNum"
+      },
+      {
+        "aggregate": [
+          {"op": "mean", "field": "Renewable_Share (%)", "as": "Avg_Renewable_Share"},
+          {"op": "sum", "field": "Total_GWh", "as": "Total_GWh"}
+        ],
+        "groupby": ["YearNum"]
+      },
+      {
+        "lookup": "YearNum",
+        "from": {
+          "data": {"url": "https://raw.githubusercontent.com/achikins/FIT3179_DataVisualisation_2_34082034/main/data/nggi_emissions_2010_2025.csv"},
+          "key": "Year ",
+          "fields": ["Average of Trend Emissions"]
+        }
+      },
+      {
+        "calculate": "(datum['Average of Trend Emissions'] * 1e9) / (datum.Total_GWh * 1e6)",
+        "as": "Emissions_Intensity_kg_per_MWh"
+      }
+    ],
+  
+    "layer": [
+      {
+        "mark": {"type": "point", "filled": true, "opacity": 0.85, "size": 120},
+        "encoding": {
+          "x": {
+            "field": "Avg_Renewable_Share",
+            "type": "quantitative",
+            "scale": {"domain": [20, 55]},
+            "axis": {"title": "Renewable Share (%)"}
+          },
+          "y": {
+            "field": "Emissions_Intensity_kg_per_MWh",
+            "type": "quantitative",
+            "scale": {"domain": [0.12, 0.26]},
+            "axis": {"title": "Emissions Intensity (kg CO₂e / MWh)"}
+          },
+          "color": {
+            "field": "YearNum",
+            "type": "ordinal",
+            "scale": {"scheme": "viridis"},
+            "legend": {"title": "Year"}
+          },
+          "size": {
+            "field": "Total_GWh",
+            "type": "quantitative",
+            "scale": {"range": [80, 600]},
+            "legend": {"title": "Total Generation (GWh)"}
+          },
+          "tooltip": [
+            {"field": "YearNum", "type": "ordinal", "title": "Year"},
+            {"field": "Avg_Renewable_Share", "type": "quantitative", "format": ".2f", "title": "Renewables (%)"},
+            {"field": "Emissions_Intensity_kg_per_MWh", "type": "quantitative", "format": ".1f", "title": "Emission Intensity (kgCO₂e/MWh)"},
+            {"field": "Total_GWh", "type": "quantitative", "format": ".0f", "title": "Total GWh"}
+          ]
+        }
+      },
+      {
+        "mark": {"type": "line", "color": "#00e5a8", "strokeWidth": 2.5},
+        "transform": [
+          {"regression": "Emissions_Intensity_kg_per_MWh", "on": "Avg_Renewable_Share"}
+        ],
+        "encoding": {
+          "x": {"field": "Avg_Renewable_Share", "type": "quantitative"},
+          "y": {"field": "Emissions_Intensity_kg_per_MWh", "type": "quantitative"}
+        }
+      }
+    ],
+  
+    "title": {
+      "text": "Renewable Share vs Emission Intensity (2010–2025)",
+      "color": "#1e293b",
+      "fontSize": 18,
+      "anchor": "start"
+    }
+  }
+  
