@@ -17,11 +17,12 @@
         body {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
             background: 
-                radial-gradient(circle at 20% 50%, rgba(0, 229, 168, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(116, 196, 118, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(74, 144, 226, 0.05) 0%, transparent 50%),
-                linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
-            color: #1e293b;
+                radial-gradient(circle at 20% 50%, rgba(255, 193, 7, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 152, 0, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(76, 175, 80, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 60% 30%, rgba(255, 235, 59, 0.06) 0%, transparent 50%),
+                linear-gradient(135deg, #fff8e1 0%, #fff3c4 30%, #e8f5e8 70%, #f1f8e9 100%);
+            color: #2e2e2e;
             min-height: 100vh;
             overflow-x: hidden;
         }
@@ -35,10 +36,12 @@
             width: 100%;
             height: 100%;
             background-image: 
-                radial-gradient(2px 2px at 20px 30px, rgba(0, 229, 168, 0.1), transparent),
-                radial-gradient(2px 2px at 40px 70px, rgba(116, 196, 118, 0.08), transparent),
-                radial-gradient(1px 1px at 90px 40px, rgba(74, 144, 226, 0.1), transparent),
-                radial-gradient(1px 1px at 130px 80px, rgba(255, 110, 110, 0.08), transparent);
+                radial-gradient(2px 2px at 20px 30px, rgba(255, 193, 7, 0.15), transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255, 152, 0, 0.12), transparent),
+                radial-gradient(1px 1px at 90px 40px, rgba(76, 175, 80, 0.15), transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255, 235, 59, 0.12), transparent),
+                radial-gradient(1px 1px at 160px 20px, rgba(139, 195, 74, 0.1), transparent),
+                radial-gradient(2px 2px at 180px 90px, rgba(255, 193, 7, 0.08), transparent);
             background-repeat: repeat;
             background-size: 200px 200px;
             animation: float 20s ease-in-out infinite;
@@ -52,37 +55,37 @@
         }
 
         .header {
-            background: rgba(248, 250, 252, 0.9);
+            background: rgba(255, 248, 225, 0.95);
             backdrop-filter: blur(20px);
             padding: 40px 0;
             text-align: center;
-            border-bottom: 1px solid rgba(0, 229, 168, 0.2);
+            border-bottom: 1px solid rgba(255, 193, 7, 0.3);
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(255, 152, 0, 0.15);
         }
 
         .header h1 {
             font-size: 3.5rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #00e5a8 0%, #74c476 50%, #4a90e2 100%);
+            background: linear-gradient(135deg, #ffc107 0%, #ff9800 30%, #4caf50 70%, #8bc34a 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 20px;
-            text-shadow: 0 0 30px rgba(0, 229, 168, 0.3);
+            text-shadow: 0 0 30px rgba(255, 193, 7, 0.4);
             animation: glow 2s ease-in-out infinite alternate;
         }
 
         @keyframes glow {
-            from { filter: drop-shadow(0 0 20px rgba(0, 229, 168, 0.3)); }
-            to { filter: drop-shadow(0 0 30px rgba(116, 196, 118, 0.4)); }
+            from { filter: drop-shadow(0 0 20px rgba(255, 193, 7, 0.4)); }
+            to { filter: drop-shadow(0 0 30px rgba(76, 175, 80, 0.5)); }
         }
 
         .header p {
             font-size: 1.3rem;
-            color: #64748b;
+            color: #5d4037;
             max-width: 900px;
             margin: 0 auto;
             line-height: 1.8;
@@ -104,12 +107,12 @@
         }
 
         .chart-container {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 20px;
             padding: 30px;
             box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.08),
-                0 0 0 1px rgba(0, 0, 0, 0.05),
+                0 20px 40px rgba(255, 152, 0, 0.12),
+                0 0 0 1px rgba(255, 193, 7, 0.2),
                 inset 0 1px 0 rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(20px);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -132,8 +135,8 @@
         .chart-container:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow: 
-                0 30px 60px rgba(0, 0, 0, 0.15),
-                0 0 0 1px rgba(0, 0, 0, 0.1),
+                0 30px 60px rgba(255, 152, 0, 0.2),
+                0 0 0 1px rgba(255, 193, 7, 0.3),
                 inset 0 1px 0 rgba(255, 255, 255, 0.9);
         }
 
@@ -144,7 +147,7 @@
         .chart-title {
             font-size: 1.6rem;
             font-weight: 700;
-            color: #1e293b;
+            color: #2e2e2e;
             margin-bottom: 20px;
             padding-bottom: 15px;
             position: relative;
@@ -166,7 +169,7 @@
 
         .chart-description {
             font-size: 1rem;
-            color: #64748b;
+            color: #5d4037;
             margin-bottom: 25px;
             line-height: 1.7;
             font-weight: 400;
@@ -174,11 +177,11 @@
         }
 
         .chart-wrapper {
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            background: linear-gradient(135deg, #fff8e1 0%, #fff3c4 50%, #e8f5e8 100%);
             border-radius: 15px;
             padding: 20px;
             min-height: 420px;
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 193, 7, 0.2);
             position: relative;
             overflow: hidden;
         }
@@ -191,8 +194,8 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(circle at 20% 20%, rgba(0, 229, 168, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(116, 196, 118, 0.03) 0%, transparent 50%);
+                radial-gradient(circle at 20% 20%, rgba(255, 193, 7, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(76, 175, 80, 0.05) 0%, transparent 50%);
             pointer-events: none;
         }
 
@@ -215,15 +218,15 @@
             justify-content: center;
             align-items: center;
             height: 250px;
-            color: #64748b;
+            color: #5d4037;
             position: relative;
         }
 
         .spinner {
             width: 50px;
             height: 50px;
-            border: 4px solid rgba(148, 163, 184, 0.3);
-            border-top: 4px solid #00e5a8;
+            border: 4px solid rgba(255, 193, 7, 0.3);
+            border-top: 4px solid #ffc107;
             border-radius: 50%;
             animation: spin 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
             margin-bottom: 20px;
@@ -238,7 +241,7 @@
             right: -4px;
             bottom: -4px;
             border: 2px solid transparent;
-            border-top: 2px solid rgba(0, 229, 168, 0.2);
+            border-top: 2px solid rgba(76, 175, 80, 0.3);
             border-radius: 50%;
             animation: spin 2s linear infinite reverse;
         }
@@ -263,46 +266,46 @@
 
         /* Chart-specific styling with enhanced colors */
         .chart-1 { 
-            color: #00e5a8;
+            color: #ffc107;
         }
         .chart-2 { 
-            color: #4a90e2;
+            color: #ff9800;
         }
         .chart-3 { 
-            color: #74c476;
+            color: #4caf50;
         }
         .chart-4 { 
-            color: #ff6e6e;
+            color: #ffeb3b;
         }
         .chart-5 { 
-            color: #31a354;
+            color: #8bc34a;
         }
 
         /* Enhanced hover effects for each chart */
         .chart-1:hover {
             box-shadow: 
-                0 30px 60px rgba(0, 229, 168, 0.2),
-                0 0 0 1px rgba(0, 229, 168, 0.3);
+                0 30px 60px rgba(255, 193, 7, 0.25),
+                0 0 0 1px rgba(255, 193, 7, 0.4);
         }
         .chart-2:hover {
             box-shadow: 
-                0 30px 60px rgba(74, 144, 226, 0.2),
-                0 0 0 1px rgba(74, 144, 226, 0.3);
+                0 30px 60px rgba(255, 152, 0, 0.25),
+                0 0 0 1px rgba(255, 152, 0, 0.4);
         }
         .chart-3:hover {
             box-shadow: 
-                0 30px 60px rgba(116, 196, 118, 0.2),
-                0 0 0 1px rgba(116, 196, 118, 0.3);
+                0 30px 60px rgba(76, 175, 80, 0.25),
+                0 0 0 1px rgba(76, 175, 80, 0.4);
         }
         .chart-4:hover {
             box-shadow: 
-                0 30px 60px rgba(255, 110, 110, 0.2),
-                0 0 0 1px rgba(255, 110, 110, 0.3);
+                0 30px 60px rgba(255, 235, 59, 0.25),
+                0 0 0 1px rgba(255, 235, 59, 0.4);
         }
         .chart-5:hover {
             box-shadow: 
-                0 30px 60px rgba(49, 163, 84, 0.2),
-                0 0 0 1px rgba(49, 163, 84, 0.3);
+                0 30px 60px rgba(139, 195, 74, 0.25),
+                0 0 0 1px rgba(139, 195, 74, 0.4);
         }
 
         /* Responsive design */
@@ -367,16 +370,16 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: rgba(241, 245, 249, 0.8);
+            background: rgba(255, 248, 225, 0.8);
         }
 
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #00e5a8, #74c476);
+            background: linear-gradient(135deg, #ffc107, #ff9800);
             border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #74c476, #4a90e2);
+            background: linear-gradient(135deg, #4caf50, #8bc34a);
         }
     </style>
 </head>
@@ -457,7 +460,7 @@
                        await vegaEmbed('#chart1', chart1Spec, {
                            actions: false,
                            renderer: 'svg',
-                           config: { background: '#f8fafc' }
+                           config: { background: '#fff8e1' }
                        });
 
                        // Load Chart 2
@@ -465,7 +468,7 @@
                        await vegaEmbed('#chart2', chart2Spec, {
                            actions: false,
                            renderer: 'svg',
-                           config: { background: '#f8fafc' }
+                           config: { background: '#fff3c4' }
                        });
 
                        // Load Chart 3
@@ -473,7 +476,7 @@
                        await vegaEmbed('#chart3', chart3Spec, {
                            actions: false,
                            renderer: 'svg',
-                           config: { background: '#f8fafc' }
+                           config: { background: '#e8f5e8' }
                        });
 
                        // Load Chart 4
@@ -481,7 +484,7 @@
                        await vegaEmbed('#chart4', chart4Spec, {
                            actions: false,
                            renderer: 'svg',
-                           config: { background: '#f8fafc' }
+                           config: { background: '#fff8e1' }
                        });
 
                        // Load Chart 5
@@ -489,7 +492,7 @@
                        await vegaEmbed('#chart5', chart5Spec, {
                            actions: false,
                            renderer: 'svg',
-                           config: { background: '#f8fafc' }
+                           config: { background: '#f1f8e9' }
                        });
 
                 console.log('Dashboard loaded successfully!');
