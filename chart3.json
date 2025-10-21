@@ -1,74 +1,97 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "description": "Chart 3 — Heatmap of Renewable Share by State (2010–2025)",
-    "width": 700,
-    "height": 400,
-    "background": "#f8fafc",
-  
-    "config": {
-      "background": "#f8fafc",
-      "axis": {
-        "labelColor": "#64748b",
-        "titleColor": "#1e293b",
-        "gridColor": "#e2e8f0"
-      },
-      "legend": {
-        "labelColor": "#1e293b",
-        "titleColor": "#1e293b",
-        "orient": "right",
-        "gradientLength": 150
-      },
-      "style": {"guide-label": {"color": "#1e293b"}}
-    },
-  
-    "data": {
-      "url": "https://raw.githubusercontent.com/achikins/FIT3179_DataVisualisation_2_34082034/main/data/Renewable_Share_By_State_2010_2025.csv"
-    },
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Chart 3 — Heatmap of Renewable Share by State (2010–2025)",
+  "width": 1010,
+  "height": 550,
+  "background": "#f8fafc",
 
-    "transform": [
-      {
-        "calculate": "toNumber(datum.Year)",
-        "as": "YearNum"
+  "config": {
+    "background": "#f8fafc",
+    "axis": {
+      "labelColor": "#64748b",
+      "titleColor": "#1e293b",
+      "gridColor": "#e2e8f0"
+    },
+    "legend": {
+      "labelColor": "#1e293b",
+      "titleColor": "#1e293b",
+      "orient": "right",
+      "gradientLength": 150
+    },
+    "style": { "guide-label": { "color": "#1e293b" } }
+  },
+
+  "data": {
+    "url": "https://raw.githubusercontent.com/achikins/FIT3179_DataVisualisation_2_34082034/main/data/Renewable_Share_By_State_2010_2025.csv"
+  },
+
+  "transform": [
+    {
+      "calculate": "toNumber(datum.Year)",
+      "as": "YearNum"
+    },
+    {
+      "impute": "Renewable_Share (%)",
+      "key": "YearNum",
+      "keyvals": [
+        2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021,
+        2022, 2023, 2024, 2025
+      ],
+      "groupby": ["State"],
+      "value": null
+    }
+  ],
+
+  "mark": {
+    "type": "rect",
+    "stroke": "#e2e8f0",
+    "strokeWidth": 1,
+    "fill": "#f8fafc"
+  },
+
+  "encoding": {
+    "x": {
+      "field": "YearNum",
+      "type": "ordinal",
+      "axis": {
+        "title": "Year",
+        "labelAngle": 0,
+        "labelFontSize": 11,
+        "titleFontSize": 13
       }
-    ],
-  
-    "mark": {"type": "rect", "stroke": "#e2e8f0", "strokeWidth": 0.5},
-  
-    "encoding": {
-      "x": {
-        "field": "YearNum",
-        "type": "ordinal",
-        "axis": {
-          "title": "Year",
-          "labelAngle": 0,
-          "labelFontSize": 11,
-          "titleFontSize": 13
-        }
+    },
+    "y": {
+      "field": "State",
+      "type": "nominal",
+      "sort": ["TAS", "SA", "VIC", "NSW", "QLD", "WA"],
+      "axis": { "title": "State", "labelFontSize": 12, "titleFontSize": 13 }
+    },
+    "color": {
+      "field": "Renewable_Share (%)",
+      "type": "quantitative",
+      "scale": {
+        "domain": [0, 100],
+        "range": ["#15314e", "#00e5a8"],
+        "nullValue": "#f8fafc"
       },
-      "y": {
-        "field": "State",
-        "type": "nominal",
-        "sort": ["TAS", "SA", "VIC", "NSW", "QLD", "WA"],
-        "axis": {"title": "State", "labelFontSize": 12, "titleFontSize": 13}
-      },
-      "color": {
+      "legend": { "title": "Renewable Share (%)" }
+    },
+    "tooltip": [
+      { "field": "State", "type": "nominal", "title": "State" },
+      { "field": "YearNum", "type": "ordinal", "title": "Year" },
+      {
         "field": "Renewable_Share (%)",
         "type": "quantitative",
-        "scale": {"domain": [0, 100], "range": ["#15314e", "#00e5a8"]},
-        "legend": {"title": "Renewable Share (%)"}
-      },
-      "tooltip": [
-        {"field": "State", "type": "nominal", "title": "State"},
-        {"field": "YearNum", "type": "ordinal", "title": "Year"},
-        {"field": "Renewable_Share (%)", "type": "quantitative", "format": ".1f", "title": "Renewable Share (%)"}
-      ]
-    },
-  
-    "title": {
-      "text": "Renewable Electricity Share by State (2010–2025)",
-      "color": "#1e293b",
-      "fontSize": 18,
-      "anchor": "start"
-    }
+        "format": ".1f",
+        "title": "Renewable Share (%)"
+      }
+    ]
+  },
+
+  "title": {
+    "text": "Renewable Electricity Share by State (2010–2025)",
+    "color": "#1e293b",
+    "fontSize": 25,
+    "anchor": "start"
   }
-  
+}
