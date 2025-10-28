@@ -29,24 +29,13 @@
     {
       "calculate": "toNumber(datum.Year)",
       "as": "YearNum"
-    },
-    {
-      "impute": "Renewable_Share (%)",
-      "key": "YearNum",
-      "keyvals": [
-        2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021,
-        2022, 2023, 2024, 2025
-      ],
-      "groupby": ["State"],
-      "value": null
     }
   ],
 
   "mark": {
     "type": "rect",
     "stroke": "#e2e8f0",
-    "strokeWidth": 1,
-    "fill": "#f8fafc"
+    "strokeWidth": 1
   },
 
   "encoding": {
